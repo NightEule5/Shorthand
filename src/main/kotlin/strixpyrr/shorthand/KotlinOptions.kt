@@ -37,13 +37,6 @@ internal inline fun KotlinCommonOptions.freeCompilerArgsInternal(populate: Compi
 	freeCompilerArgs = freeCompilerArgs + scope.arguments
 }
 
-inline fun KotlinCommonOptions.freeCompilerArgs(populate: CommonCompilerArgumentScope.() -> Unit)
-{
-	val scope = CommonCompilerArgumentScope().apply(populate)
-	
-	freeCompilerArgs = freeCompilerArgs + scope.arguments
-}
-
 @Suppress("MemberVisibilityCanBePrivate")
 class CompilerArgumentScope
 @PublishedApi
@@ -84,17 +77,4 @@ internal constructor()
 	{
 		const val RequiresOptIn = "kotlin.RequiresOptIn"
 	}
-}
-
-class CommonCompilerArgumentScope
-@PublishedApi
-internal constructor()
-{
-	var allowKotlinPackage = false
-	
-	@PublishedApi
-	internal val arguments get() =
-		if (allowKotlinPackage)
-			listOf(XAllowKotlinPackage)
-		else emptyList()
 }
