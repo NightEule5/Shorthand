@@ -18,6 +18,7 @@ dependencies()
 {
 	implementation(kotlin("stdlib"))
 	implementation(kotlin("gradle-plugin", version = "1.5.30-RC"))
+	implementation(gradleApi())
 }
 
 tasks()
