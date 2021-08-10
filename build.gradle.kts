@@ -3,6 +3,7 @@
 plugins {
 	kotlin("jvm") version "1.5.30-RC"
 	`java-gradle-plugin`
+	`maven-publish`
 }
 
 group = "strixpyrr.shorthand"
@@ -47,6 +48,25 @@ gradlePlugin()
 				Provides an easy shorthand for certain tasks in the Gradle Kotlin
 				DSL without obfuscating function.
 				""".trimIndent()
+		}
+	}
+}
+
+val kotlinSourcesJar by tasks
+
+publishing()
+{
+	repositories()
+	{
+		mavenLocal()
+	}
+	
+	publications()
+	{
+		create<MavenPublication>("shorthand")
+		{
+			from(components["kotlin"])
+			artifact(kotlinSourcesJar)
 		}
 	}
 }
