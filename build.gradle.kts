@@ -1,3 +1,5 @@
+@file:Suppress("SuspiciousCollectionReassignment")
+
 plugins {
 	kotlin("jvm") version "1.5.30-RC"
 	`java-gradle-plugin`
@@ -14,7 +16,7 @@ repositories()
 dependencies()
 {
 	implementation(kotlin("stdlib"))
-	implementation(gradleKotlinDsl())
+	implementation(kotlin("gradle-plugin", version = "1.5.30-RC"))
 }
 
 tasks()
@@ -25,6 +27,8 @@ tasks()
 		{
 			languageVersion = "1.5"
 			jvmTarget       = "1.8"
+			
+			freeCompilerArgs += listOf("-Xopt-in=kotlin.RequiresOptIn")
 		}
 	}
 }
