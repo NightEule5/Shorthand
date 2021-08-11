@@ -23,22 +23,45 @@ private const val XAllowKotlinPackage = "-Xallow-kotlin-package"
 // Multiplatform projects specify their opt-in annotations in a different way, so
 // this feature is exposed here on the JVM and JS, but not on Common.
 
-inline fun KotlinJvmOptions.freeCompilerArgs(populate: CompilerArgumentScope.() -> Unit) =
-	freeCompilerArgsInternal(populate)
+inline fun KotlinJvmOptions.freeCompilerArgs(populate: JvmCompilerArgumentScope.() -> Unit) =
+	freeCompilerArgsInternal(JvmCompilerArgumentScope(), populate)
 
 inline fun KotlinJsOptions.freeCompilerArgs(populate: CompilerArgumentScope.() -> Unit) =
-	freeCompilerArgsInternal(populate)
+	freeCompilerArgsInternal(CompilerArgumentScope(), populate)
 
 @PublishedApi
-internal inline fun KotlinCommonOptions.freeCompilerArgsInternal(populate: CompilerArgumentScope.() -> Unit)
+internal inline fun <S : CompilerArgumentScope> KotlinCommonOptions.freeCompilerArgsInternal(scope: S, populate: S.() -> Unit)
 {
-	val scope = CompilerArgumentScope().apply(populate)
+	scope.apply(populate)
 	
 	freeCompilerArgs = freeCompilerArgs + scope.arguments
 }
 
+class JvmCompilerArgumentScope
+@PublishedApi
+internal constructor() : CompilerArgumentScope()
+{
+	var jvmDefault: JvmDefaultMode? = null
+	
+	override fun count() = super.count() + (jvmDefault != null).toInt()
+	
+	override fun MutableList<String>.populate()
+	{
+		if (jvmDefault != null)
+			this += "-Xjvm-default=$jvmDefault"
+	}
+}
+
+enum class JvmDefaultMode(private val value: String)
+{
+	All("all"),
+	AllCompatibility("all-compatibility");
+	
+	override fun toString() = value
+}
+
 @Suppress("MemberVisibilityCanBePrivate")
-class CompilerArgumentScope
+open class CompilerArgumentScope
 @PublishedApi
 internal constructor()
 {
@@ -61,7 +84,9 @@ internal constructor()
 	
 	var allowKotlinPackage = false
 	
-	private fun count() = optInAnnotations.size + (if (allowKotlinPackage) 1 else 0)
+	protected open fun count() = optInAnnotations.size + allowKotlinPackage.toInt()
+	
+	protected open fun MutableList<String>.populate() { }
 	
 	@OptIn(ExperimentalStdlibApi::class)
 	@PublishedApi
@@ -78,3 +103,6 @@ internal constructor()
 		const val RequiresOptIn = "kotlin.RequiresOptIn"
 	}
 }
+
+@Suppress("NOTHING_TO_INLINE")
+internal inline fun Boolean.toInt() = if (this) 1 else 0
