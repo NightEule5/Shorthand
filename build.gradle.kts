@@ -1,7 +1,7 @@
 @file:Suppress("SuspiciousCollectionReassignment")
 
 plugins {
-	kotlin("jvm") version "1.5.30-RC"
+	kotlin("jvm") version "1.5.30"
 	`java-gradle-plugin`
 	`maven-publish`
 }
@@ -17,8 +17,9 @@ repositories()
 dependencies()
 {
 	implementation(kotlin("stdlib"))
-	implementation(kotlin("gradle-plugin", version = "1.5.30-RC"))
+	implementation(kotlin("gradle-plugin", version = "1.5.30"))
 	implementation(gradleApi())
+	implementation(gradleKotlinDsl())
 }
 
 tasks()
@@ -27,8 +28,8 @@ tasks()
 	{
 		kotlinOptions.run()
 		{
-			languageVersion = "1.5"
 			jvmTarget       = "1.8"
+			languageVersion = "1.5"
 			
 			freeCompilerArgs += listOf("-Xopt-in=kotlin.RequiresOptIn")
 		}
