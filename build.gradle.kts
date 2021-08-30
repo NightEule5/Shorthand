@@ -70,10 +70,7 @@ publishing()
 			from(components["kotlin"])
 			artifact(kotlinSourcesJar)
 			
-			pom()
-			{
-				name.set("shorthand")
-			}
+			artifactId = artifactId.toLowerCase()
 		}
 	}
 }
