@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 @file:Suppress("SpellCheckingInspection")
-package strixpyrr.shorthand
+package dev.strixpyrr.shorthand
 
 import org.jetbrains.kotlin.gradle.dsl.KotlinCommonOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinJsOptions

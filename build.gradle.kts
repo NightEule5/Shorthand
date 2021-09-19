@@ -6,7 +6,7 @@ plugins {
 	`maven-publish`
 }
 
-group = "strixpyrr.shorthand"
+group = "dev.strixpyrr.shorthand"
 version = "0.0.1"
 
 repositories()
@@ -42,8 +42,8 @@ gradlePlugin()
 	{
 		val shorthand by creating()
 		{
-			id = "strixpyrr.shorthand"
-			implementationClass = "strixpyrr.shorthand.EmptyPlugin"
+			id = "dev.strixpyrr.shorthand"
+			implementationClass = "dev.strixpyrr.shorthand.EmptyPlugin"
 			displayName = "Shorthand"
 			description =
 				"""
