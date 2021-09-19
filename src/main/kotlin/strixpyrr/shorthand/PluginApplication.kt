@@ -29,7 +29,7 @@ inline fun PluginAware.applyPlugins(apply: PluginApplicationScope.() -> Unit)
 fun PluginAware.applyKotlin(platform: String) =
 	applyPlugin("org.jetbrains.kotlin.$platform")
 
-private fun PluginAware.applyPlugin(id: String) = apply(mapOf("plugin" to id))
+internal fun PluginAware.applyPlugin(id: String) = apply(mapOf("plugin" to id))
 
 @JvmInline
 value class PluginApplicationScope
