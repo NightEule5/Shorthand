@@ -68,3 +68,22 @@ tasks {
 	}
 }
 ```
+
+### Plugin Application
+
+```kotlin
+// Before
+subprojects {
+	apply(plugin = "org.jetbrains.kotlin.multiplatform")
+	apply(plugin = "maven-publish")
+}
+
+// After
+subprojects {
+	applyPlugins {
+		kotlin("multiplatform")
+		
+		id("maven-publish")
+	}
+}
+```
