@@ -1,12 +1,20 @@
 @file:Suppress("SuspiciousCollectionReassignment")
 
+import Build_gradle.PublicationConstants.ApacheName
+import Build_gradle.PublicationConstants.ApacheUrl
+import Build_gradle.PublicationConstants.Description
+import Build_gradle.PublicationConstants.DisplayName
+import Build_gradle.PublicationConstants.Inception
+import Build_gradle.PublicationConstants.Url
+
 plugins {
 	kotlin("jvm") version "1.5.30"
 	`java-gradle-plugin`
 	`maven-publish`
+	signing
 }
 
-group = "dev.strixpyrr.shorthand"
+group = "dev.strixpyrr"
 version = "0.0.1"
 
 repositories()
@@ -44,12 +52,8 @@ gradlePlugin()
 		{
 			id = "dev.strixpyrr.shorthand"
 			implementationClass = "dev.strixpyrr.shorthand.EmptyPlugin"
-			displayName = "Shorthand"
-			description =
-				"""
-				Provides an easy shorthand for certain tasks in the Gradle Kotlin
-				DSL without obfuscating function.
-				""".trimIndent()
+			displayName = DisplayName
+			description = Description
 		}
 	}
 }
@@ -71,6 +75,55 @@ publishing()
 			artifact(kotlinSourcesJar)
 			
 			artifactId = artifactId.toLowerCase()
+			
+			pom()
+			{
+				description  .set(Description)
+				url          .set(Url)
+				inceptionYear.set(Inception)
+				
+				licenses()
+				{
+					license()
+					{
+						name.set(ApacheName)
+						url .set(ApacheUrl )
+					}
+				}
+				
+				developers()
+				{
+					developer()
+					{
+						name.set("NightEule5")
+					}
+				}
+			}
 		}
 	}
+}
+
+signing()
+{
+	useGpgCmd()
+	
+	sign(publishing.publications["shorthand"])
+}
+
+object PublicationConstants
+{
+	const val Description =
+		"Provides an easy shorthand for certain tasks in the Gradle Kotlin DSL " +
+		"without obfuscating function."
+	
+	const val DisplayName = "Shorthand"
+	
+	const val Url = "https://github.com/NightEule5/Shorthand"
+	
+	const val Inception = "2021"
+	
+	// License
+	
+	const val ApacheName = "Apache-2.0"
+	const val ApacheUrl  = "http://www.apache.org/licenses/LICENSE-2.0"
 }
