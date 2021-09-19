@@ -103,12 +103,13 @@ publishing()
 	}
 }
 
-signing()
-{
-	useGpgCmd()
-	
-	sign(publishing.publications["shorthand"])
-}
+if (!isJitpack)
+	signing()
+	{
+		useGpgCmd()
+		
+		sign(publishing.publications["shorthand"])
+	}
 
 object PublicationConstants
 {
@@ -127,3 +128,5 @@ object PublicationConstants
 	const val ApacheName = "Apache-2.0"
 	const val ApacheUrl  = "http://www.apache.org/licenses/LICENSE-2.0"
 }
+
+val isJitpack get() = System.getenv("JITPACK") != null
