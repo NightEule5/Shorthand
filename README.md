@@ -5,6 +5,10 @@ DSL.
 
 ## Installation
 
+There are two ways to install Shorthand: via the `buildscript` block or via the `pluginManagement` block.
+
+### `buildscript` block
+
 Put this at the top of your `build.gradle.kts`:
 
 ```kotlin
@@ -16,6 +20,30 @@ buildscript {
 	dependencies {
 		classpath(group = "dev.strixpyrr", name = "shorthand", version = "0.0.1")
 	}
+}
+```
+
+### `pluginManagement` block
+
+Put this somewhere in your `settings.gradle.kts`:
+
+```kotlin
+pluginManagement {
+	repositories {
+		maven(url = "https://jitpack.io")
+	}
+	
+	plugins {
+		id("dev.strixpyrr.shorthand") version "0.0.1"
+	}
+}
+```
+
+Then apply it using the `plugins` DSL:
+
+```kotlin
+plugins {
+	id("dev.strixpyrr.shorthand")
 }
 ```
 
