@@ -8,14 +8,14 @@ import Build_gradle.PublicationConstants.Inception
 import Build_gradle.PublicationConstants.Url
 
 plugins {
-	kotlin("jvm") version "1.5.30"
+	kotlin("jvm") version "1.5.31"
 	`java-gradle-plugin`
 	`maven-publish`
 	signing
 }
 
 group = "dev.strixpyrr"
-version = "0.0.1"
+version = "0.0.2"
 
 repositories()
 {
@@ -25,7 +25,7 @@ repositories()
 dependencies()
 {
 	implementation(kotlin("stdlib"))
-	implementation(kotlin("gradle-plugin", version = "1.5.30"))
+	implementation(kotlin("gradle-plugin", version = "1.5.31"))
 	implementation(gradleApi())
 	implementation(gradleKotlinDsl())
 }
