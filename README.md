@@ -18,7 +18,7 @@ buildscript {
 	}
 	
 	dependencies {
-		classpath(group = "dev.strixpyrr", name = "shorthand", version = "0.0.2")
+		classpath(group = "dev.strixpyrr", name = "shorthand", version = "0.0.3")
 	}
 }
 ```
@@ -35,7 +35,7 @@ pluginManagement {
 	}
 	
 	plugins {
-		id("dev.strixpyrr.shorthand") version "0.0.2"
+		id("dev.strixpyrr.shorthand") version "0.0.3"
 	}
 }
 ```
@@ -113,6 +113,18 @@ subprojects {
 		kotlin("multiplatform")
 		
 		id("maven-publish")
+	}
+}
+```
+
+### Jitpack.io detection
+
+```kotlin
+if (!isJitpack) {
+	signing {
+		useGpgCmd()
+		
+		// ...
 	}
 }
 ```
