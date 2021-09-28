@@ -30,6 +30,7 @@ Put this somewhere in your `settings.gradle.kts`:
 ```kotlin
 pluginManagement {
 	repositories {
+		gradlePluginPortal()
 		maven(url = "https://jitpack.io")
 	}
 	
