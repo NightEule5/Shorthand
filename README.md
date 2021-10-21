@@ -13,13 +13,13 @@ Put this at the top of your `build.gradle.kts`:
 
 ```kotlin
 buildscript {
-	repositories {
-		maven(url = "https://jitpack.io")
-	}
-	
-	dependencies {
-		classpath(group = "dev.strixpyrr", name = "shorthand", version = "0.0.3")
-	}
+    repositories {
+        maven(url = "https://jitpack.io")
+    }
+    
+    dependencies {
+        classpath(group = "dev.strixpyrr", name = "shorthand", version = "0.0.3")
+    }
 }
 ```
 
@@ -29,14 +29,14 @@ Put this somewhere in your `settings.gradle.kts`:
 
 ```kotlin
 pluginManagement {
-	repositories {
-		gradlePluginPortal()
-		maven(url = "https://jitpack.io")
-	}
-	
-	plugins {
-		id("dev.strixpyrr.shorthand") version "0.0.3"
-	}
+    repositories {
+        gradlePluginPortal()
+        maven(url = "https://jitpack.io")
+    }
+    
+    plugins {
+        id("dev.strixpyrr.shorthand") version "0.0.3"
+    }
 }
 ```
 
@@ -44,7 +44,7 @@ Then apply it using the `plugins` DSL:
 
 ```kotlin
 plugins {
-	id("dev.strixpyrr.shorthand")
+    id("dev.strixpyrr.shorthand")
 }
 ```
 
@@ -55,24 +55,24 @@ plugins {
 ```kotlin
 // Before
 tasks {
-	compileKotlin {
-		freeCompilerArgs =
-			listOf(
-				"-Xopt-in=kotlin.RequiresOptIn",
-				"-Xjvm-default=all"
-			)
-	}
+    compileKotlin {
+        freeCompilerArgs =
+            listOf(
+                "-Xopt-in=kotlin.RequiresOptIn",
+                "-Xjvm-default=all"
+            )
+    }
 }
 
 // After
 tasks {
-	compileKotlin {
-		freeCompilerArgs {
-			optIn(RequiresOptIn)
-			
-			jvmDefault = JvmDefaultMode.All
-		}
-	}
+    compileKotlin {
+        freeCompilerArgs {
+            optIn(RequiresOptIn)
+            
+            jvmDefault = JvmDefaultMode.All
+        }
+    }
 }
 ```
 
@@ -81,20 +81,20 @@ tasks {
 ```kotlin
 // Before
 tasks {
-	jar {
-		archiveClassifier.set("...")
-		
-		val classifier = archiveClassifier.get()
-	}
+    jar {
+        archiveClassifier.set("...")
+        
+        val classifier = archiveClassifier.get()
+    }
 }
 
 // After
 tasks {
-	jar {
-		archiveClassifier("...")
-		
-		val classifier = archiveClassifier()
-	}
+    jar {
+        archiveClassifier("...")
+        
+        val classifier = archiveClassifier()
+    }
 }
 ```
 
@@ -103,17 +103,17 @@ tasks {
 ```kotlin
 // Before
 subprojects {
-	apply(plugin = "org.jetbrains.kotlin.multiplatform")
-	apply(plugin = "maven-publish")
+    apply(plugin = "org.jetbrains.kotlin.multiplatform")
+    apply(plugin = "maven-publish")
 }
 
 // After
 subprojects {
-	applyPlugins {
-		kotlin("multiplatform")
-		
-		id("maven-publish")
-	}
+    applyPlugins {
+        kotlin("multiplatform")
+        
+        id("maven-publish")
+    }
 }
 ```
 
@@ -121,10 +121,10 @@ subprojects {
 
 ```kotlin
 if (!isJitpack) {
-	signing {
-		useGpgCmd()
-		
-		// ...
-	}
+    signing {
+        useGpgCmd()
+        
+        // ...
+    }
 }
 ```
