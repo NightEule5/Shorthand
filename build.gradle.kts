@@ -74,8 +74,6 @@ publishing()
 			from(components["kotlin"])
 			artifact(kotlinSourcesJar)
 			
-			artifactId = artifactId.toLowerCase()
-			
 			pom()
 			{
 				description  .set(Description)

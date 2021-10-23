@@ -1,2 +1,1 @@
-rootProject.name = "Shorthand"
-
+rootProject.name = "shorthand"
