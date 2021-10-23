@@ -18,7 +18,7 @@ buildscript {
     }
     
     dependencies {
-        classpath(group = "dev.strixpyrr", name = "shorthand", version = "0.0.3")
+        classpath(group = "dev.strixpyrr", name = "shorthand", version = "0.0.4")
     }
 }
 ```
@@ -35,7 +35,7 @@ pluginManagement {
     }
     
     plugins {
-        id("dev.strixpyrr.shorthand") version "0.0.3"
+        id("dev.strixpyrr.shorthand") version "0.0.4"
     }
 }
 ```
