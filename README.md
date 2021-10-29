@@ -35,7 +35,7 @@ pluginManagement {
     }
     
     plugins {
-        id("dev.strixpyrr.shorthand") version "0.0.4"
+        id("dev.strixpyrr.shorthand") version "0.0.5"
     }
 }
 ```
