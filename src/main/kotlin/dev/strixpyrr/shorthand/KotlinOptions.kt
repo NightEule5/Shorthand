@@ -96,6 +96,8 @@ internal constructor()
 		
 		if (allowKotlinPackage)
 			this += XAllowKotlinPackage
+		
+		populate()
 	}
 	
 	companion object
