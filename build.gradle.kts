@@ -28,6 +28,9 @@ dependencies()
 	implementation(kotlin("gradle-plugin", version = "1.5.31"))
 	implementation(gradleApi())
 	implementation(gradleKotlinDsl())
+	
+	testImplementation(deps.kotest)
+	testImplementation(deps.mockk )
 }
 
 tasks()
@@ -41,6 +44,11 @@ tasks()
 			
 			freeCompilerArgs += listOf("-Xopt-in=kotlin.RequiresOptIn")
 		}
+	}
+	
+	withType<Test>
+	{
+		useJUnitPlatform()
 	}
 }
 
